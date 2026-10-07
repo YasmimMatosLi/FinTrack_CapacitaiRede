@@ -1,4 +1,4 @@
-package com.fintrack.exceptions;
+package fintrack.exceptions;
 
 public class EntradaInvalidaException extends Exception {
 
