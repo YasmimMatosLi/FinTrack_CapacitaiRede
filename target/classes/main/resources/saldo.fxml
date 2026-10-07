@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="650.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fintrack.controller.SaldoController">
+    <top>
+        <VBox alignment="CENTER_LEFT" spacing="5.0" styleClass="header-pane" BorderPane.alignment="CENTER">
+            <children>
+                <Text styleClass="header-title" text="Fintrack"/>
+                <Text styleClass="header-subtitle" text="Relatório e saldo atual"/>
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+            </padding>
+            <children>
+                <VBox alignment="CENTER" maxWidth="500.0" spacing="10.0" styleClass="card-saldo-main">
+                    <children>
+                        <Label style="-fx-font-size: 14px; -fx-text-fill: #E65100; -fx-font-weight: bold;" text="SALDO ATUAL" />
+                        <Label fx:id="lblSaldoTotal" style="-fx-font-size: 28px; -fx-font-weight: bold;" text="R$ 0,00" />
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+
+                <HBox alignment="CENTER" maxWidth="500.0" spacing="15.0">
+                    <children>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="8.0" styleClass="card-receita">
+                            <children>
+                                <Label style="-fx-font-size: 13px; -fx-text-fill: #2E7D32; -fx-font-weight: bold;" text="TOTAL ENTRADAS" />
+                                <Label fx:id="lblTotalReceitas" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2E7D32;" text="R$ 0,00" />
+                            </children>
+                            <padding>
+                                <Insets bottom="15.0" top="15.0" />
+                            </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" HBox.hgrow="ALWAYS" spacing="8.0" styleClass="card-despesa">
+                            <children>
+                                <Label style="-fx-font-size: 13px; -fx-text-fill: #C62828; -fx-font-weight: bold;" text="TOTAL SAÍDAS" />
+                                <Label fx:id="lblTotalDespesas" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #C62828;" text="R$ 0,00" />
+                            </children>
+                            <padding>
+                                <Insets bottom="15.0" top="15.0" />
+                            </padding>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <VBox alignment="CENTER" maxWidth="500.0">
+                    <padding>
+                        <Insets top="15.0" />
+                    </padding>
+                    <children>
+                        <Button onAction="#voltarParaMain" styleClass="button-orange-soft" text="← Voltar à Tela Inicial" />
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
