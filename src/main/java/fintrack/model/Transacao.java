@@ -1,8 +1,9 @@
-package com.fintrack.model;
+package fintrack.model;
 
 import java.time.LocalDate;
 
 public class Transacao {
+    private int id;
     private String decricao;
     private double valor;
     private boolean ehReceita;
@@ -48,6 +49,14 @@ public class Transacao {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
