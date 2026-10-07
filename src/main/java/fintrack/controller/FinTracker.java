@@ -1,7 +1,7 @@
-package com.fintrack.controller;
+package fintrack.controller;
 
-import com.fintrack.exceptions.EntradaInvalidaException;
-import com.fintrack.model.Transacao;
+import fintrack.exceptions.EntradaInvalidaException;
+import fintrack.model.Transacao;
 
 import java.util.ArrayList;
 
