@@ -1,6 +1,7 @@
 package fintrack.controller;
 
 import fintrack.dao.TransacoesDAO;
+import fintrack.repository.RepositoryGeneric;
 import fintrack.util.FiltroGenerico;
 import fintrack.util.Navegador;
 import fintrack.model.Transacao;
@@ -44,8 +45,9 @@ public class MainController {
     // Guarda a lista completa carregada do banco de dados
     private List<Transacao> listaCompleta;
 
-    // Instância da classe genérica
     private FiltroGenerico<Transacao> filtroGenerico = new FiltroGenerico<>();
+
+    private RepositoryGeneric<Transacao> repositorio = new RepositoryGeneric<>();
 
     @FXML
     public void initialize() throws SQLException {
@@ -80,13 +82,13 @@ public class MainController {
 
     private void carregarDadosDoBanco() {
         try {
-            listaCompleta = dao.listarTodas();
+            listaCompleta = repositorio.listarTodos();
 
             if (listaCompleta == null) {
                 listaCompleta = new ArrayList<>();
             }
             listaTransacoes.clear();
-            listaTransacoes.addAll(dao.listarTodas());
+            listaTransacoes.addAll(repositorio.listarTodos());
             tabelaTransacoes.setItems(FXCollections.observableArrayList(listaCompleta));
         } catch (SQLException e) {
             System.err.println("Erro ao carregar dados do banco: " + e.getMessage());
@@ -136,7 +138,7 @@ public class MainController {
 
         if (confirmacao.showAndWait().get() == ButtonType.OK) {
             try {
-                dao.removerTransacao(transacao.getId());
+                repositorio.deletar(transacao.getId());
                 listaTransacoes.remove(transacao);
                 exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Transação removida com sucesso!");
             } catch (SQLException e) {

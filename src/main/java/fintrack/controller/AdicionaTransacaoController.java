@@ -1,6 +1,7 @@
 package fintrack.controller;
 
 import fintrack.dao.TransacoesDAO;
+import fintrack.repository.RepositoryGeneric;
 import fintrack.util.Navegador;
 import fintrack.model.Transacao;
 import javafx.collections.FXCollections;
@@ -25,7 +26,7 @@ public class AdicionaTransacaoController {
     @FXML
     private DatePicker dpData;
 
-    TransacoesDAO transacoesDAO = new TransacoesDAO();
+    private RepositoryGeneric<Transacao> repositorio = new RepositoryGeneric<>();
 
     private static Transacao transacaoEmEdicao = null;
 
@@ -72,11 +73,11 @@ public class AdicionaTransacaoController {
 
             if (transacaoEmEdicao == null) {
                 Transacao novaTransacao = new Transacao(descricao, valor, ehReceita, data);
-                transacoesDAO.salvarTransacao(novaTransacao);
+                repositorio.adicionar(novaTransacao);
                 exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Transação cadastrada com sucesso!");
             } else {
                 Transacao transacaoAtualizada = new Transacao(descricao, valor, ehReceita, data);
-                transacoesDAO.atualizarTransacao(transacaoEmEdicao.getId(), transacaoAtualizada);
+                repositorio.atualizar(transacaoEmEdicao.getId(), transacaoEmEdicao);
                 transacaoEmEdicao = null;
                 exibirAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Transação atualizada com sucesso!");
             }
