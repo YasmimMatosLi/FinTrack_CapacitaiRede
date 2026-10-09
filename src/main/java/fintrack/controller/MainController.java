@@ -75,8 +75,6 @@ public class MainController {
             }
         });
         configurarColunaAcoes();
-
-
         carregarDadosDoBanco();
     }
 
@@ -96,35 +94,35 @@ public class MainController {
     }
 
     private void configurarColunaAcoes() {
-        colunaAcoes.setCellFactory(param -> new TableCell<>() {
+        colunaAcoes.setCellFactory(param -> new TableCell<Transacao, Void>() {
             private final Button btnEditar = new Button("Atualizar");
             private final Button btnRemover = new Button("Remover");
-            private final HBox painelBotoes = new HBox(8, btnEditar, btnRemover);
+            private final HBox container = new HBox(10, btnEditar, btnRemover);
 
             {
-                painelBotoes.setAlignment(Pos.CENTER);
-
-                btnEditar.setStyle("-fx-background-color: #FFF3E0; -fx-cursor: hand; -fx-text-fill: #E65100;");
-                btnRemover.setStyle("-fx-background-color: #FFEBEE; -fx-cursor: hand; -fx-text-fill: #C62828;");
-
-                btnRemover.setOnAction(event -> {
-                    Transacao transacao = getTableView().getItems().get(getIndex());
-                    removerTransacao(transacao);
-                });
+                btnEditar.setStyle("-fx-background-color: #FFE0B2; -fx-text-fill: #E65100; -fx-cursor: hand;");
+                btnRemover.setStyle("-fx-background-color: #FFEBEE; -fx-text-fill: #C62828; -fx-cursor: hand;");
+                container.setAlignment(Pos.CENTER);
 
                 btnEditar.setOnAction(event -> {
                     Transacao transacao = getTableView().getItems().get(getIndex());
                     editarTransacao(event, transacao);
                 });
+
+                btnRemover.setOnAction(event -> {
+                    Transacao transacao = getTableView().getItems().get(getIndex());
+                    removerTransacao(transacao);
+                });
             }
 
             @Override
-            protected void updateItem(Void item, boolean vazio) {
-                super.updateItem(item, vazio);
-                if (vazio) {
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || getIndex() >= getTableView().getItems().size()) {
                     setGraphic(null);
                 } else {
-                    setGraphic(painelBotoes);
+                    setGraphic(container);
                 }
             }
         });
